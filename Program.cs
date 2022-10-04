@@ -5,66 +5,72 @@
 //1, -7, 567, 89, 223-> 3
 
 
-Console.WriteLine("Введите числа через запятую: ");
-int[] numbers = StringNumbers(Console.ReadLine()!);
-PrintArray(numbers);
-
-int sum = 0;
-for (int i = 0; i < numbers.Length; i++)
+internal class Program
 {
-    if (numbers[i] > 0)
+    private static void Main(string[] args)
     {
-        sum++;
-    }
-}
-Console.WriteLine();
-Console.WriteLine($"количество значений больше 0 = {sum}");
+        Console.WriteLine("Введите числа через запятую: ");
+        int[] numbers = StringNumbers(Console.ReadLine()!);
+        PrintArray(numbers);
 
-
-int[] StringNumbers(string input)
-{
-    int count = 1;
-    for (int i = 0; i < input.Length; i++)
-    {
-        if (input[i] == ',')
+        int sum = 0;
+        for (int i = 0; i < numbers.Length; i++)
         {
-            count++;
+            if (numbers[i] > 0)
+            {
+                sum++;
+            }
+        }
+        Console.WriteLine();
+        Console.WriteLine($"количество значений больше 0 = {sum}");
+
+
+        int[] StringNumbers(string input)
+        {
+            int count = 1;
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (input[i] == ',')
+                {
+                    count++;
+                }
+            }
+
+            int[] numbers = new int[count];
+            int index = 0;
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                string temp = "";
+
+                while (input[i] != ',')
+                {
+                    if (i != input.Length - 1)
+                    {
+                        temp += input[i].ToString();
+                        i++;
+                    }
+                    else
+                    {
+                        temp += input[i].ToString();
+                        break;
+                    }
+                }
+                numbers[index] = Convert.ToInt32(temp);
+                index++;
+            }
+            return numbers;
+        }
+
+
+        void PrintArray(int[] array)
+        {
+            Console.Write("[ ");
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.Write(array[i] + " ");
+            }
+            Console.Write("]");
         }
     }
-
-    int[] numbers = new int [count];
-    int index = 0;
-
-    for (int i = 0; i < input.Length; i++)
-    {
-        string temp = "";
-
-        while (input [i] != ',')
-        {
-        if(i != input.Length - 1)
-        {
-            temp += input [i].ToString();
-            i++;
-        }
-        else
-        {
-            temp += input [i].ToString();
-            break;
-        }
-        }
-        numbers[index] = Convert.ToInt32(temp);
-        index++;
-    }
-    return numbers;
-}
-
-
-void PrintArray(int[] array)
-{
-    Console.Write("[ ");
-    for (int i = 0; i < array.Length; i++)
-    {
-        Console.Write(array[i] + " ");
-    }
-    Console.Write("]");
 }
